@@ -1,0 +1,49 @@
+import { defineField, defineType } from 'sanity';
+
+export const tag = defineType({
+  name: 'tag',
+  title: 'Expertise Tag',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'name', maxLength: 96 },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'size',
+      title: 'Display size',
+      type: 'string',
+      description: 'Controls prominence in the tag cloud on the About page',
+      options: {
+        list: [
+          { title: 'Small', value: 'sm' },
+          { title: 'Default', value: 'default' },
+          { title: 'Large', value: 'lg' },
+        ],
+      },
+      initialValue: 'default',
+    }),
+  ],
+  orderings: [
+    {
+      title: 'Name (A–Z)',
+      name: 'nameAsc',
+      by: [{ field: 'name', direction: 'asc' }],
+    },
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'size',
+    },
+  },
+});

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getRecentPosts, formatDate } from '../lib/sanity';
+
+const posts = await getRecentPosts(6);
 ---
 
 <BaseLayout title="Yasen Lilov — Data, Analytics & AI" activePage="home">
@@ -28,92 +31,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>Thoughts on analytics, AI, and building MarTech systems.</p>
       </div>
 
-      <div class="post-grid">
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">How-To</span>
-            <span>Jun 2025</span>
-          </div>
-          <h3><a href="/blog/segment-implementation-deep-dive">Segment Implementation Deep-Dive [Part 1]: Architecture & Tracking Plan</a></h3>
-          <p>A practical walkthrough of implementing Segment from scratch — covering architecture decisions, tracking plan design, and source configuration.</p>
-          <div class="post-card-tags">
-            <span class="tag">Segment</span>
-            <span class="tag">CDP</span>
-            <span class="tag">Architecture</span>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">Thought Leadership</span>
-            <span>Mar 2025</span>
-          </div>
-          <h3><a href="/blog/test-dont-guess">Test, Don't Guess: Data Analytics and Paid Ads for Faster PMF</a></h3>
-          <p>How startups can use analytics and paid acquisition together to find product-market fit without burning cash on guesswork.</p>
-          <div class="post-card-tags">
-            <span class="tag">Analytics</span>
-            <span class="tag">Paid Ads</span>
-            <span class="tag">Startups</span>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">Thought Leadership</span>
-            <span>Mar 2025</span>
-          </div>
-          <h3><a href="/blog/ai-reshaping-marketing-analytics">How AI is Reshaping Digital Marketing Analytics</a></h3>
-          <p>AI isn't replacing analysts — it's changing the questions we ask and the speed at which we can answer them.</p>
-          <div class="post-card-tags">
-            <span class="tag">AI</span>
-            <span class="tag">Marketing</span>
-            <span class="tag">Analytics</span>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">How-To</span>
-            <span>Mar 2025</span>
-          </div>
-          <h3><a href="/blog/ga4-server-side-tracking">GA4 Server-Side Tracking and the Future of Web Analytics</a></h3>
-          <p>Server-side tagging is becoming essential. Here's how GA4 server-side works, when you need it, and how to set it up properly.</p>
-          <div class="post-card-tags">
-            <span class="tag">GA4</span>
-            <span class="tag">Server-Side</span>
-            <span class="tag">GTM</span>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">Thought Leadership</span>
-            <span>Mar 2025</span>
-          </div>
-          <h3><a href="/blog/ai-agents-service-businesses">Beyond Automation: The Rise of AI Agents in Service Businesses</a></h3>
-          <p>AI agents are moving beyond chatbots. What happens when they can reason, plan, and execute multi-step business processes?</p>
-          <div class="post-card-tags">
-            <span class="tag">AI Agents</span>
-            <span class="tag">Automation</span>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <div class="post-card-meta">
-            <span class="post-card-category">How-To</span>
-            <span>Oct 2023</span>
-          </div>
-          <h3><a href="/blog/ga4-data-redaction">GA4 Data Redaction: Clean PII in a Simple Way</a></h3>
-          <p>A straightforward approach to keeping personally identifiable information out of your GA4 data without overcomplicating your setup.</p>
-          <div class="post-card-tags">
-            <span class="tag">GA4</span>
-            <span class="tag">Privacy</span>
-            <span class="tag">PII</span>
-          </div>
-        </article>
-
-      </div>
+      {posts.length > 0 ? (
+        <div class="post-grid">
+          {posts.map((post: any) => (
+            <article class="post-card">
+              <div class="post-card-meta">
+                <span class="post-card-category">{post.category}</span>
+                <span>{formatDate(post.publishedAt)}</span>
+              </div>
+              <h3><a href={`/blog/${post.slug}`}>{post.title}</a></h3>
+              <p>{post.excerpt}</p>
+              {post.tags && post.tags.length > 0 && (
+                <div class="post-card-tags">
+                  {post.tags.map((tag: string) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p style="color: var(--text-muted); text-align: center;">Posts coming soon — content migration in progress.</p>
+      )}
 
       <div style="text-align: center; margin-top: 48px;">
         <a href="/blog" class="btn btn-secondary">View all posts &rarr;</a>

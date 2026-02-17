@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PortableText } from 'astro-portabletext';
+import { getPostBySlug, getPostSlugs, formatDate, urlFor } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  const slugs = await getPostSlugs();
+  return slugs.map((item: any) => ({
+    params: { slug: item.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug as string);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+---
+
+<BaseLayout title={`${post.title} — Yasen Lilov`} activePage="blog">
+
+  <article class="blog-post">
+    <div class="container" style="max-width: 760px;">
+
+      <!-- Post Header -->
+      <header class="post-header">
+        <a href="/blog" class="back-link">&larr; Back to blog</a>
+        <div class="post-meta">
+          <span class="post-card-category">{post.category}</span>
+          <span>{formatDate(post.publishedAt)}</span>
+          {post.readTime && <span>{post.readTime}</span>}
+        </div>
+        <h1>{post.title}</h1>
+        {post.tags && post.tags.length > 0 && (
+          <div class="post-card-tags" style="margin-top: 16px;">
+            {post.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <!-- Featured Image -->
+      {post.mainImage && (
+        <div class="post-image" style="margin: 32px 0;">
+          <img
+            src={urlFor(post.mainImage).width(760).url()}
+            alt={post.mainImage.alt || post.title}
+            style="width: 100%; border-radius: var(--radius-lg);"
+          />
+        </div>
+      )}
+
+      <!-- Post Body -->
+      <div class="post-content">
+        {post.body && <PortableText value={post.body} />}
+      </div>
+
+      <!-- Post Footer -->
+      <div class="post-nav" style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border);">
+        <a href="/blog" class="btn btn-secondary">&larr; All posts</a>
+      </div>
+
+    </div>
+  </article>
+
+</BaseLayout>

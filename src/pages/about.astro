@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllTags } from '../lib/sanity';
+
+const tags = await getAllTags();
 ---
 
 <BaseLayout title="About — Yasen Lilov" activePage="about">
@@ -66,49 +69,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>Areas of expertise</h2>
       </div>
       <div class="tag-cloud">
-        <a href="/blog?tag=ai" class="tag-cloud-item">AI</a>
-        <a href="/blog?tag=analytics" class="tag-cloud-item">Analytics</a>
-        <a href="/blog?tag=angularjs" class="tag-cloud-item size-sm">AngularJS</a>
-        <a href="/blog?tag=apis" class="tag-cloud-item">APIs</a>
-        <a href="/blog?tag=architecture" class="tag-cloud-item">Architecture</a>
-        <a href="/blog?tag=automation" class="tag-cloud-item">Automation</a>
-        <a href="/blog?tag=beacon-api" class="tag-cloud-item size-sm">Beacon API</a>
-        <a href="/blog?tag=bigquery" class="tag-cloud-item">BigQuery</a>
-        <a href="/blog?tag=bootstrap" class="tag-cloud-item size-sm">Bootstrap</a>
-        <a href="/blog?tag=crisp-dm" class="tag-cloud-item size-sm">CRISP-DM</a>
-        <a href="/blog?tag=css" class="tag-cloud-item size-sm">CSS</a>
-        <a href="/blog?tag=data-mining" class="tag-cloud-item size-sm">Data Mining</a>
-        <a href="/blog?tag=ecommerce" class="tag-cloud-item size-sm">eCommerce</a>
-        <a href="/blog?tag=ga4" class="tag-cloud-item size-lg">GA4</a>
-        <a href="/blog?tag=ga-core-reporting-api" class="tag-cloud-item size-sm">GA Core Reporting API</a>
-        <a href="/blog?tag=ga-management-api" class="tag-cloud-item size-sm">GA Management API</a>
-        <a href="/blog?tag=ga-measurement-protocol" class="tag-cloud-item">GA Measurement Protocol</a>
-        <a href="/blog?tag=google-ads" class="tag-cloud-item">Google Ads</a>
-        <a href="/blog?tag=google-analytics" class="tag-cloud-item size-lg">Google Analytics</a>
-        <a href="/blog?tag=gtm" class="tag-cloud-item size-lg">GTM</a>
-        <a href="/blog?tag=html" class="tag-cloud-item size-sm">HTML</a>
-        <a href="/blog?tag=http" class="tag-cloud-item size-sm">HTTP</a>
-        <a href="/blog?tag=javascript" class="tag-cloud-item size-lg">JavaScript</a>
-        <a href="/blog?tag=jquery" class="tag-cloud-item size-sm">jQuery</a>
-        <a href="/blog?tag=json" class="tag-cloud-item size-sm">JSON</a>
-        <a href="/blog?tag=machine-learning" class="tag-cloud-item">Machine Learning</a>
-        <a href="/blog?tag=mysql" class="tag-cloud-item size-sm">MySQL</a>
-        <a href="/blog?tag=php" class="tag-cloud-item size-sm">PHP</a>
-        <a href="/blog?tag=plugins" class="tag-cloud-item size-sm">Plugins</a>
-        <a href="/blog?tag=pmf" class="tag-cloud-item size-sm">PMF</a>
-        <a href="/blog?tag=predictive-modelling" class="tag-cloud-item size-sm">Predictive Modelling</a>
-        <a href="/blog?tag=privacy" class="tag-cloud-item">Privacy</a>
-        <a href="/blog?tag=productivity" class="tag-cloud-item size-sm">Productivity</a>
-        <a href="/blog?tag=programming" class="tag-cloud-item">Programming</a>
-        <a href="/blog?tag=psychology" class="tag-cloud-item size-sm">Psychology</a>
-        <a href="/blog?tag=qa" class="tag-cloud-item">QA</a>
-        <a href="/blog?tag=regex" class="tag-cloud-item size-sm">RegEx</a>
-        <a href="/blog?tag=segment" class="tag-cloud-item size-lg">Segment</a>
-        <a href="/blog?tag=single-page-applications" class="tag-cloud-item size-sm">Single-Page Applications</a>
-        <a href="/blog?tag=strategy" class="tag-cloud-item">Strategy</a>
-        <a href="/blog?tag=vr" class="tag-cloud-item size-sm">VR</a>
-        <a href="/blog?tag=wordpress" class="tag-cloud-item size-sm">WordPress</a>
-        <a href="/blog?tag=youtube-data-api" class="tag-cloud-item size-sm">YouTube Data API</a>
+        {tags.length > 0 ? (
+          tags.map((tag: any) => (
+            <a
+              href={`/blog?tag=${tag.slug}`}
+              class={`tag-cloud-item${tag.size === 'sm' ? ' size-sm' : tag.size === 'lg' ? ' size-lg' : ''}`}
+            >
+              {tag.name}
+            </a>
+          ))
+        ) : (
+          <p style="color: var(--text-muted);">Tags loading after content migration.</p>
+        )}
       </div>
     </div>
   </section>

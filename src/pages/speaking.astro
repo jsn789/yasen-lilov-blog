@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllEvents } from '../lib/sanity';
+
+const events = await getAllEvents();
 ---
 
 <BaseLayout title="Speaking & Events — Yasen Lilov" activePage="speaking">
@@ -17,77 +20,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section style="padding-top: 0;">
     <div class="container">
 
-      <div class="events-list">
-
-        <!-- 2024 -->
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2024</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Unconference</span>
-            <h3>MeasureCamp London</h3>
-            <p>AI-Powered Analytics Workflows</p>
-          </div>
+      {events.length > 0 ? (
+        <div class="events-list">
+          {events.map((evt: any) => (
+            <div class="event-card">
+              <div class="event-date">
+                <span class="event-month">{evt.year}</span>
+              </div>
+              <div class="event-details">
+                <span class="event-type">{evt.eventType}</span>
+                <h3>{evt.link ? <a href={evt.link} target="_blank" rel="noopener">{evt.title}</a> : evt.title}</h3>
+                {evt.topic && <p>{evt.topic}</p>}
+              </div>
+            </div>
+          ))}
         </div>
+      ) : (
+        <p style="color: var(--text-muted); text-align: center;">Events coming soon.</p>
+      )}
 
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2024</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Workshop</span>
-            <h3>Google B2B Growth Bootcamp</h3>
-            <p>GA4 Implementation & Strategy</p>
-          </div>
-        </div>
-
-        <!-- 2023 -->
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2023</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Conference</span>
-            <h3>SuperWeek Hungary</h3>
-            <p>GA4 Server-Side Tracking in Practice</p>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2023</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Conference</span>
-            <h3>Analytics Summit</h3>
-            <p>Building a Measurement Framework That Scales</p>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2023</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Unconference</span>
-            <h3>MeasureCamp London</h3>
-            <p>Google Consent Mode v2 — What You Need to Know</p>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="event-month">2023</span>
-          </div>
-          <div class="event-details">
-            <span class="event-type">Guest Lecture</span>
-            <h3>AUBG — American University in Bulgaria</h3>
-            <p>Digital Analytics & Career Paths in Data</p>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -153,6 +104,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 700;
     margin-bottom: 4px;
     color: var(--text-primary);
+  }
+
+  .event-details h3 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .event-details h3 a:hover {
+    color: var(--accent);
   }
 
   .event-details p {
