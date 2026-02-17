@@ -59,43 +59,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Timeline -->
+  <!-- Areas of Expertise -->
   <section>
     <div class="container">
       <div class="section-header">
-        <h2>Journey</h2>
+        <h2>Areas of expertise</h2>
       </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="year">2024 &ndash; Present</div>
-          <h3>Data & Analytics Lead — VertoDigital</h3>
-          <p>Leading analytics strategy, implementation, and AI/automation initiatives.</p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2022 &ndash; 2024</div>
-          <h3>Senior Analytics Consultant</h3>
-          <p>GA4 migrations, server-side tracking, Segment implementations, and measurement strategy for enterprise clients.</p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2019 &ndash; 2022</div>
-          <h3>Analytics Specialist</h3>
-          <p>Deep GTM/GA implementations, custom tracking solutions, and analytics QA frameworks.</p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2017</div>
-          <h3>Started jsndesign.co.uk</h3>
-          <p>Began writing about analytics, JavaScript, and data — documenting what I was learning and building.</p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2014</div>
-          <h3>JP Morgan Code for Good</h3>
-          <p>Hackathon that sparked my interest in using code to solve real problems.</p>
-        </div>
+      <div class="tag-cloud">
+        <a href="/blog?tag=ai" class="tag-cloud-item">AI</a>
+        <a href="/blog?tag=analytics" class="tag-cloud-item">Analytics</a>
+        <a href="/blog?tag=angularjs" class="tag-cloud-item size-sm">AngularJS</a>
+        <a href="/blog?tag=apis" class="tag-cloud-item">APIs</a>
+        <a href="/blog?tag=architecture" class="tag-cloud-item">Architecture</a>
+        <a href="/blog?tag=automation" class="tag-cloud-item">Automation</a>
+        <a href="/blog?tag=beacon-api" class="tag-cloud-item size-sm">Beacon API</a>
+        <a href="/blog?tag=bigquery" class="tag-cloud-item">BigQuery</a>
+        <a href="/blog?tag=bootstrap" class="tag-cloud-item size-sm">Bootstrap</a>
+        <a href="/blog?tag=crisp-dm" class="tag-cloud-item size-sm">CRISP-DM</a>
+        <a href="/blog?tag=css" class="tag-cloud-item size-sm">CSS</a>
+        <a href="/blog?tag=data-mining" class="tag-cloud-item size-sm">Data Mining</a>
+        <a href="/blog?tag=ecommerce" class="tag-cloud-item size-sm">eCommerce</a>
+        <a href="/blog?tag=ga4" class="tag-cloud-item size-lg">GA4</a>
+        <a href="/blog?tag=ga-core-reporting-api" class="tag-cloud-item size-sm">GA Core Reporting API</a>
+        <a href="/blog?tag=ga-management-api" class="tag-cloud-item size-sm">GA Management API</a>
+        <a href="/blog?tag=ga-measurement-protocol" class="tag-cloud-item">GA Measurement Protocol</a>
+        <a href="/blog?tag=google-ads" class="tag-cloud-item">Google Ads</a>
+        <a href="/blog?tag=google-analytics" class="tag-cloud-item size-lg">Google Analytics</a>
+        <a href="/blog?tag=gtm" class="tag-cloud-item size-lg">GTM</a>
+        <a href="/blog?tag=html" class="tag-cloud-item size-sm">HTML</a>
+        <a href="/blog?tag=http" class="tag-cloud-item size-sm">HTTP</a>
+        <a href="/blog?tag=javascript" class="tag-cloud-item size-lg">JavaScript</a>
+        <a href="/blog?tag=jquery" class="tag-cloud-item size-sm">jQuery</a>
+        <a href="/blog?tag=json" class="tag-cloud-item size-sm">JSON</a>
+        <a href="/blog?tag=machine-learning" class="tag-cloud-item">Machine Learning</a>
+        <a href="/blog?tag=mysql" class="tag-cloud-item size-sm">MySQL</a>
+        <a href="/blog?tag=php" class="tag-cloud-item size-sm">PHP</a>
+        <a href="/blog?tag=plugins" class="tag-cloud-item size-sm">Plugins</a>
+        <a href="/blog?tag=pmf" class="tag-cloud-item size-sm">PMF</a>
+        <a href="/blog?tag=predictive-modelling" class="tag-cloud-item size-sm">Predictive Modelling</a>
+        <a href="/blog?tag=privacy" class="tag-cloud-item">Privacy</a>
+        <a href="/blog?tag=productivity" class="tag-cloud-item size-sm">Productivity</a>
+        <a href="/blog?tag=programming" class="tag-cloud-item">Programming</a>
+        <a href="/blog?tag=psychology" class="tag-cloud-item size-sm">Psychology</a>
+        <a href="/blog?tag=qa" class="tag-cloud-item">QA</a>
+        <a href="/blog?tag=regex" class="tag-cloud-item size-sm">RegEx</a>
+        <a href="/blog?tag=segment" class="tag-cloud-item size-lg">Segment</a>
+        <a href="/blog?tag=single-page-applications" class="tag-cloud-item size-sm">Single-Page Applications</a>
+        <a href="/blog?tag=strategy" class="tag-cloud-item">Strategy</a>
+        <a href="/blog?tag=vr" class="tag-cloud-item size-sm">VR</a>
+        <a href="/blog?tag=wordpress" class="tag-cloud-item size-sm">WordPress</a>
+        <a href="/blog?tag=youtube-data-api" class="tag-cloud-item size-sm">YouTube Data API</a>
       </div>
     </div>
   </section>
@@ -130,19 +143,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Certifications -->
+  <!-- How I Got Here -->
   <section>
     <div class="container">
       <div class="section-header">
-        <h2>Certifications</h2>
+        <h2>How I got here</h2>
       </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Google Analytics Certified</span>
-        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Google Tag Manager Certified</span>
-        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">GA4 Certified</span>
-        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Segment Certified</span>
-        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">CXL Digital Analytics</span>
-        <a href="#" class="tag" style="font-size: 0.85rem; padding: 6px 16px; color: var(--accent);">View all on Accredible &rarr;</a>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2024 &ndash; Present</div>
+          <h3>Data & Analytics Lead — VertoDigital</h3>
+          <p>Leading analytics strategy, implementation, and AI/automation initiatives.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2022 &ndash; 2024</div>
+          <h3>Senior Analytics Consultant</h3>
+          <p>GA4 migrations, server-side tracking, Segment implementations, and measurement strategy for enterprise clients.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2019 &ndash; 2022</div>
+          <h3>Analytics Specialist</h3>
+          <p>Deep GTM/GA implementations, custom tracking solutions, and analytics QA frameworks.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2017</div>
+          <h3>Started jsndesign.co.uk</h3>
+          <p>Began writing about analytics, JavaScript, and data — documenting what I was learning and building.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2014</div>
+          <h3>JP Morgan Code for Good</h3>
+          <p>Hackathon that sparked my interest in using code to solve real problems.</p>
+        </div>
       </div>
     </div>
   </section>

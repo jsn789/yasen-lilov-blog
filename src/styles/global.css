@@ -414,6 +414,43 @@ section {
   max-width: 600px;
 }
 
+/* Tag Cloud */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tag-cloud-item {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.tag-cloud-item:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-glow);
+}
+.tag-cloud-item.size-sm {
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+.tag-cloud-item.size-lg {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 6px 18px;
+  color: var(--text-secondary);
+}
+
 /* Skills Grid */
 .skills-grid {
   display: grid;
