@@ -70,14 +70,17 @@ export async function getPostSlugs() {
 
 export async function getAllEvents() {
   return sanityClient.fetch(
-    `*[_type == "event"] | order(year desc) {
+    `*[_type == "event"] | order(date desc) {
       _id,
       title,
+      date,
       year,
+      location,
       eventType,
       topic,
       description,
-      link
+      link,
+      slidesEmbed
     }`
   );
 }

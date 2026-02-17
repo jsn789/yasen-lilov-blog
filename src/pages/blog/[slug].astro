@@ -4,6 +4,7 @@ import { PortableText } from 'astro-portabletext';
 import { getPostBySlug, getPostSlugs, formatDate, urlFor } from '../../lib/sanity';
 import PortableTextImage from '../../components/PortableTextImage.astro';
 import PortableTextCode from '../../components/PortableTextCode.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const components = {
   type: {
@@ -66,8 +67,11 @@ if (!post) {
         {post.body && <PortableText value={post.body} components={components} />}
       </div>
 
+      <!-- Share Buttons -->
+      <ShareButtons title={post.title} slug={post.slug} />
+
       <!-- Post Footer -->
-      <div class="post-nav" style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border);">
+      <div class="post-nav" style="margin-top: 32px; padding-top: 24px;">
         <a href="/blog" class="btn btn-secondary">&larr; All posts</a>
       </div>
 

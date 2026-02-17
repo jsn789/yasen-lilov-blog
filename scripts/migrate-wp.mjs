@@ -73,7 +73,42 @@ async function uploadImageToSanity(imageUrl) {
 
 function htmlToPortableText(htmlString, imageAssetMap) {
   if (!htmlString) return [];
-  const root = parse(htmlString);
+
+  // Pre-process: strip the x-entry-share div and its contents
+  let cleaned = htmlString.replace(/<div\s+class="x-entry-share"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/gi, '');
+  // Also strip any leftover share-related patterns
+  cleaned = cleaned.replace(/<div\s+class="x-entry-share"[\s\S]*$/gi, '');
+
+  // Strip corrupted <be> tags (seen in some WP posts)
+  cleaned = cleaned.replace(/<be>/gi, '');
+
+  // Clean invalid HTML: <p></br> or <p><br/></p> empty paragraphs
+  cleaned = cleaned.replace(/<p>\s*<\/?br\s*\/?>\s*<\/p>/gi, '');
+  // Clean standalone </br> tags
+  cleaned = cleaned.replace(/<\/br>/gi, '<br/>');
+
+  // Split <p> tags that use <br />\n as paragraph separators
+  // Turns <p>...<br />\nMore text...</p> into <p>...</p>\n<p>More text...</p>
+  cleaned = cleaned.replace(/<br\s*\/?>\s*\n/gi, '</p>\n<p>');
+
+  // Clean up any resulting empty <p></p> tags
+  cleaned = cleaned.replace(/<p>\s*<\/p>/gi, '');
+
+  // Close unclosed <li> tags: <li>text\n<li> → <li>text</li>\n<li>
+  cleaned = cleaned.replace(/<li([^>]*)>([^<]*(?:<(?!\/li>|li\b)[^>]*>[^<]*)*?)(?=\s*<li|\s*<\/[uo]l|\s*<p>|\s*<h\d|\s*<div|\s*$)/gi, '<li$1>$2</li>');
+
+  // Wrap orphaned <li> sequences in <ul> — match <li> blocks appearing after block-level elements
+  cleaned = cleaned.replace(
+    /((?:<\/p>|<\/h\d>|<\/div>|<\/blockquote>)\s*)((?:<li[\s\S]*?<\/li>\s*)+)/gi,
+    (match, prefix, liBlock) => {
+      return prefix + '<ul>' + liBlock + '</ul>';
+    }
+  );
+
+  // Strip X-theme specific elements that don't contain useful content
+  cleaned = cleaned.replace(/<div\s+class="x-share-options[\s\S]*?<\/div>/gi, '');
+
+  const root = parse(cleaned);
   const blocks = [];
 
   function processChildren(node) {
@@ -302,8 +337,35 @@ function htmlToPortableText(htmlString, imageAssetMap) {
       }
     }
 
-    // Divs and other containers — recurse
+    // Handle orphaned <li> elements (not wrapped in ul/ol) — treat as bullet list
+    if (tag === 'li') {
+      const { spans, markDefs } = processChildren(node);
+      if (spans.length > 0) {
+        blocks.push({
+          _type: 'block',
+          _key: key(),
+          style: 'normal',
+          listItem: 'bullet',
+          level: 1,
+          children: spans,
+          markDefs,
+        });
+      }
+      return;
+    }
+
+    // Skip iframes (SlideShare, YouTube embeds in post content)
+    if (tag === 'iframe') {
+      return;
+    }
+
+    // Divs and other containers — recurse (but skip share-related divs)
     if (['div', 'section', 'article', 'main', 'aside', 'span', 'figure'].includes(tag)) {
+      const className = node.getAttribute?.('class') || '';
+      // Skip share-related divs
+      if (className.includes('x-entry-share') || className.includes('x-share')) {
+        return;
+      }
       for (const child of node.childNodes) {
         processNode(child);
       }
