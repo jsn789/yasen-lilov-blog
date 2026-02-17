@@ -2,6 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { PortableText } from 'astro-portabletext';
 import { getPostBySlug, getPostSlugs, formatDate, urlFor } from '../../lib/sanity';
+import PortableTextImage from '../../components/PortableTextImage.astro';
+import PortableTextCode from '../../components/PortableTextCode.astro';
+
+const components = {
+  type: {
+    image: PortableTextImage,
+    code: PortableTextCode,
+  },
+};
 
 export async function getStaticPaths() {
   const slugs = await getPostSlugs();
@@ -54,7 +63,7 @@ if (!post) {
 
       <!-- Post Body -->
       <div class="post-content">
-        {post.body && <PortableText value={post.body} />}
+        {post.body && <PortableText value={post.body} components={components} />}
       </div>
 
       <!-- Post Footer -->

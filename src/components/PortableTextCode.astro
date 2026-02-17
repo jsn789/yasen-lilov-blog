@@ -1,0 +1,15 @@
+---
+const { node } = Astro.props;
+const code = node.code || '';
+const language = node.language || 'text';
+const filename = node.filename || '';
+---
+
+<div class="code-block" style="margin: 24px 0;">
+  {filename && (
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 8px 16px; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+      {filename}
+    </div>
+  )}
+  <pre style={filename ? "border-radius: 0 0 var(--radius-lg) var(--radius-lg); margin-top: 0;" : ""}><code class={`language-${language}`} set:html={code.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+</div>

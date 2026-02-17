@@ -1,0 +1,15 @@
+---
+import { urlFor } from '../lib/sanity';
+
+const { node } = Astro.props;
+const src = node.asset ? urlFor(node.asset).width(760).url() : '';
+const alt = node.alt || '';
+const caption = node.caption || '';
+---
+
+{src && (
+  <figure style="margin: 32px 0;">
+    <img src={src} alt={alt} style="width: 100%; border-radius: var(--radius-lg);" loading="lazy" />
+    {caption && <figcaption style="text-align: center; margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">{caption}</figcaption>}
+  </figure>
+)}
