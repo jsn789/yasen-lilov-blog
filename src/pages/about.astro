@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About — Yasen Lilov" activePage="about">
+
+  <!-- About Hero / Intro -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-intro">
+        <div class="about-photo">Your photo</div>
+        <div class="about-text">
+          <h1>Yasen Lilov</h1>
+          <div class="role">Data & Analytics Lead at VertoDigital</div>
+          <p>I've spent the last 8+ years helping businesses understand their data — from hands-on GTM implementations and GA4 audits to building analytics strategies that actually get used.</p>
+          <p>More recently, I've been deep into AI and automation: building workflows that connect data collection, analysis, and action. I believe the best analytics isn't just dashboards — it's systems that make better decisions inevitable.</p>
+          <p>I write about what I learn, speak at industry events, and build tools when existing ones frustrate me.</p>
+          <div style="margin-top: 24px;">
+            <a href="/contact" class="btn btn-primary">Get in touch</a>
+            <a href="/blog" class="btn btn-secondary" style="margin-left: 8px;">Read my writing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>What I do</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-icon">&#x1F4CA;</div>
+          <h3>Analytics Strategy</h3>
+          <p>Designing measurement frameworks, KPI structures, and analytics architectures for businesses at different stages of data maturity.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-icon">&#x1F527;</div>
+          <h3>Implementation</h3>
+          <p>Hands-on GA4, GTM, Segment, and server-side tracking. From tracking plans to production deployments and QA.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-icon">&#x1F916;</div>
+          <h3>AI & Automation</h3>
+          <p>Building AI-powered workflows with n8n, LLMs, and APIs. Automating reporting, content pipelines, and data processing.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-icon">&#x1F399;</div>
+          <h3>Speaking & Training</h3>
+          <p>Conference talks, team workshops, and training sessions on analytics, GTM, and data strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Journey</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2024 &ndash; Present</div>
+          <h3>Data & Analytics Lead — VertoDigital</h3>
+          <p>Leading analytics strategy, implementation, and AI/automation initiatives.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2022 &ndash; 2024</div>
+          <h3>Senior Analytics Consultant</h3>
+          <p>GA4 migrations, server-side tracking, Segment implementations, and measurement strategy for enterprise clients.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2019 &ndash; 2022</div>
+          <h3>Analytics Specialist</h3>
+          <p>Deep GTM/GA implementations, custom tracking solutions, and analytics QA frameworks.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2017</div>
+          <h3>Started jsndesign.co.uk</h3>
+          <p>Began writing about analytics, JavaScript, and data — documenting what I was learning and building.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2014</div>
+          <h3>JP Morgan Code for Good</h3>
+          <p>Hackathon that sparked my interest in using code to solve real problems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speaking & Events -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Speaking & Events</h2>
+        <p>Selected talks and appearances.</p>
+      </div>
+
+      <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+        <div class="skill-card">
+          <div class="year" style="margin-bottom: 8px;">2024</div>
+          <h3>MeasureCamp London</h3>
+          <p>AI-Powered Analytics Workflows</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="year" style="margin-bottom: 8px;">2023</div>
+          <h3>SuperWeek Hungary</h3>
+          <p>GA4 Server-Side Tracking in Practice</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="year" style="margin-bottom: 8px;">2023</div>
+          <h3>Analytics Summit</h3>
+          <p>Building a Measurement Framework That Scales</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Certifications</h2>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Google Analytics Certified</span>
+        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Google Tag Manager Certified</span>
+        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">GA4 Certified</span>
+        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">Segment Certified</span>
+        <span class="tag" style="font-size: 0.85rem; padding: 6px 16px;">CXL Digital Analytics</span>
+        <a href="#" class="tag" style="font-size: 0.85rem; padding: 6px 16px; color: var(--accent);">View all on Accredible &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
