@@ -193,6 +193,7 @@ section {
   letter-spacing: 0.05em;
   cursor: default;
   position: relative;
+  display: inline-block;
   transition: color 0.3s ease, background 0.3s ease;
 }
 
@@ -204,7 +205,7 @@ section {
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
-  font-size: calc(1em / 0.7);
+  font-size: 1em;
   letter-spacing: 0.02em;
   color: #7dd3fc;
   opacity: 0;
